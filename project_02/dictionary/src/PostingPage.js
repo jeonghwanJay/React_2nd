@@ -1,23 +1,45 @@
 import React from 'react'
 import styled from 'styled-components';
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { createWordFB } from './redux/modules/word';
 
-const PostingPage = (props) => {
-    
-   
+const PostingPage = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const wordRef = useRef('');
+    const byungRef = useRef('');
+    const meanRef = useRef('');
+    const examRef = useRef('');
+    const transRef = useRef('');
+
+const addWordList = () => {
+    dispatch(createWordFB({
+        word: wordRef.current.value,
+        byung: byungRef.current.value,
+        mean: meanRef.current.value,
+        exam: examRef.current.value,
+        trans: transRef.current.value,
+        completed: false,
+    }));
+    history.push('/');
+};
     return (
         <>
         <Title>단어 추가하기</Title>       
         <List1>단어</List1>
-        <INPUT1 type="text"></INPUT1>
+        <INPUT1 type="text" ref={wordRef} id="input_word"></INPUT1>
         <List2>병음</List2>
-        <INPUT2 type="text"></INPUT2>
+        <INPUT2 type="text" ref={byungRef} id="input_byung"></INPUT2>
         <List3>의미</List3>
-        <INPUT3 type="text"></INPUT3>
+        <INPUT3 type="text" ref={meanRef} id="input_mean"></INPUT3>
         <List4>예문</List4>
-        <INPUT4 type="text"></INPUT4>
+        <INPUT4 type="text" ref={examRef} id="input_exam"></INPUT4>
         <List5>해석</List5>
-        <INPUT5 type="text"></INPUT5>
-        <BUTTON type='submit'>저장하기</BUTTON>         
+        <INPUT5 type="text" ref={transRef} id="input_trans"></INPUT5>
+        <BUTTON type='submit' onclick={addWordList}>저장하기</BUTTON>         
         </>
 
         );

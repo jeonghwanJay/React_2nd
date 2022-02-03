@@ -1,13 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
-import  {Route, useHistory} from 'react-router-dom'
+import React, {useEffect} from 'react';
+import styled from 'styled-components';
+import  {Route, useHistory} from 'react-router-dom';
 import PostingPage from './PostingPage';
-import WordList from './WordList'
+import WordList from './WordList';
 import Update from './UpDate';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from './firebase';
 
 
 function App() {
   const history = useHistory();
+  useEffect(async() => {
+    addDoc(collection(db, "bucket"), {word: '20a2020', byung: 'ddd', mean: 'ddd', exam: 'ddd', trans: 'asd', completed: "false"})
+  }, []) 
   
   return (
     <div className="App">
@@ -50,10 +55,10 @@ right: 10px;
 width: 50px;
 height: 50px;
 border-radius: 50%;
-background: #08088A;
+background: #08088A; 
 cursor: pointer;
 align-items: center;
-justify-content: center;
+justify-content: center; 
 border: none;
 font-size: 28px;
 color: white;
